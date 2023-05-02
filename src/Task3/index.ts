@@ -1,15 +1,10 @@
 import Graph from "../modules/Graph/Graph"
-import inputKeyManager from "../modules/input/inputKeyManager"
+import InputKeyManager from "../modules/input/InputKeyManager"
 import output from "../modules/output/output"
 import BridgesAndCutVertices from "./BridgesAndCutVertices"
 
 const main = (): void => {
-    const keyManager = inputKeyManager()
-
-    if (!keyManager) {
-        console.log("Error")
-        return
-    }
+    const keyManager: InputKeyManager = new InputKeyManager()
 
     if (keyManager.isHelp) {
         console.log(
@@ -22,6 +17,11 @@ const main = (): void => {
             "   -o - outputting the result to a file\n" + 
             "   -h - reference\n"
         )
+        return
+    }
+
+    if (!keyManager.inputFileName || !keyManager.strategyReading) {
+        console.log("Error")
         return
     }
 

@@ -6,44 +6,43 @@ import parseAdjacencyMatrix from "./parseAdjacencyMatrix"
 import parseEdgesList from "./parseEdgesList"
 import parseAdjacencyList from "./parseAdjacencyList"
 
-const keyMatching: KeyMatching = {
-    "-e": "inputFileName",
-    "-m": "inputFileName",
-    "-l": "inputFileName",
-    "-o": "outputFileName",
-    "-h": "isHelp"
-}
+class InputKeyManager {
+    public readonly inputFileName?: string
+    public readonly strategyReading?: () => number[][]
+    public readonly outputFileName?: string
+    public readonly isHelp?: boolean
 
-const strategy: Strategy = {
-    "-e": parseEdgesList,
-    "-m": parseAdjacencyMatrix,
-    "-l": parseAdjacencyList
-}
+    protected params: Param[] = []
 
-const inputKeyManager = <T extends IinputKeyManager = IinputKeyManager>(matching: KeyMatching<T> = keyMatching): T | null => {
-    const params: Param[] = parseParams()
-    let res: T = {} as T
-    res.isHelp = false
-
-    for(let {flag, value} of params) {
-        if (!matching[flag]) return null
-        let property: keyof T = matching[flag]
-        if (res[property]) return null
-
-        if (property === "isHelp") res.isHelp = true
-        if (property === "inputFileName") {
-            res.inputFileName = `../../tests/${value}`
-            try {
-                const text: string = fs.readFileSync(res.inputFileName, "utf-8").trim()
-                res.strategyReading = strategy[flag](text)
-            } catch(err) {
-                return null
-            }
-        }
-        if (property === "outputFileName") res.outputFileName = value
+    private readonly strategy: Strategy = {
+        "-e": parseEdgesList,
+        "-m": parseAdjacencyMatrix,
+        "-l": parseAdjacencyList
     }
 
-    return res
+    constructor() {
+        this.params = parseParams()
+
+        for(let {flag, value} of this.params) { 
+            if (flag === "-h") this.isHelp = true
+
+            if (flag === "-e" || flag === "-m" || flag === "-l") {
+                if (this.inputFileName) {
+                    this.inputFileName = undefined
+                    break
+                }
+                this.inputFileName = `../../tests/${value}`
+                try {
+                    const text: string = fs.readFileSync(this.inputFileName, "utf-8").trim()
+                    this.strategyReading = this.strategy[flag](text)
+                } catch(err) {
+                    throw "Error"
+                }
+            }
+
+            if (flag === "-o") this.outputFileName = value
+        }
+    }
 }
 
-export default inputKeyManager
+export default InputKeyManager
