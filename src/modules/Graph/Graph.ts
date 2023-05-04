@@ -24,12 +24,12 @@ class Graph {
         return res
     }
 
-    public list_of_edges(v: number | undefined = undefined): number[][] {
-        let res: number[][] = []
+    public list_of_edges(v: number | undefined = undefined): Edge[] {
+        let edges: Edge[] = []
         for (let i = v || 0; i <= (v || this._matrix.length - 1); i++)
             for (let j = 0; j < this._matrix.length; j++)
-                if (this.is_edge(i, j)) res.push([i, j])
-        return res
+                if (this.is_edge(i, j)) edges.push({u: i, v: j, weight: this.weight(i, j)})
+        return edges
     }
 
     public is_directed(): boolean {

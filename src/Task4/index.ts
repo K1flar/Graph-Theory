@@ -1,9 +1,10 @@
 import Graph from "../modules/Graph/Graph"
-import InputKeyManager from "../modules/input/InputKeyManager"
+import SpanningTreeInputKeyManager from "./SpanningTreeInputKeyManager"
 import output from "../modules/output/output"
+import SpanningTree from "./SpanningTree"
 
 const main = (): void => {
-    const keyManager: InputKeyManager = new InputKeyManager()
+    const keyManager: SpanningTreeInputKeyManager = new SpanningTreeInputKeyManager()
 
     if (keyManager.isHelp) {
         console.log(
@@ -19,17 +20,32 @@ const main = (): void => {
         return
     }
 
-    if (!keyManager.inputFileName || !keyManager.strategyReading) {
+    if (!keyManager.inputFileName || !keyManager.strategyReading || !keyManager.algorithms) {
         console.log("Error")
         return
     }
 
     const graph: Graph = new Graph(keyManager.strategyReading)
 
-    
+    const spanningTree: SpanningTree = new SpanningTree(graph)
 
     const write = output(keyManager.outputFileName)
-    
+
+    for (let flag of keyManager.algorithms) {
+        let tree: Edge[] = []
+        let sum: number = 0
+
+        let ts = (new Date()).getTime()
+        if (flag === "-k") [tree, sum] = spanningTree.algKruskal()
+        if (flag === "-p") [tree, sum] = spanningTree.algPrima()
+        if (flag === "-b") [tree, sum] = spanningTree.algBoruvka()
+        let te = (new Date()).getTime()
+
+        write(`Minimum spanning tree:\n[${tree.map(e => `(${e.u}, ${e.v}, ${e.weight})`)}]\n`)
+        write(`Weight of spanning tree: ${sum}\n`)
+        if (keyManager.algorithms.length > 1)
+            write(`Execution time: ${te - ts}ms\n`)
+    }
 
 }
 
