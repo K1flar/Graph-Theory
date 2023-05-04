@@ -21,7 +21,7 @@ abstract class AbstractGraphCharacteristics {
 
         return res
     }
-
+//ДЕНЧИК ХУЕСОС
     private algFloydWarshall(): number[][] {
         let matrix: number[][] = this._graph.adjacency_matrix()
         for (let i = 0; i < matrix.length; i++)
