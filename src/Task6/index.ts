@@ -39,10 +39,11 @@ const main = (): void => {
     }
 
     const distancesToPeaks = algorithms[algorithm as keyof typeof algorithms] 
+    let [distances, isContainsNegativeCycle] = distancesToPeaks.solve()
 
     const write = output(keyManager.outputFileName)
-    
-    if (distancesToPeaks.isContainsNegativeCycle()) {
+
+    if (isContainsNegativeCycle) {
         write(`Graph contains a negative cycle.\n`)
     } else {
         if (distancesToPeaks.isContainsNegativeEdge()) 
@@ -50,11 +51,8 @@ const main = (): void => {
         else 
             write(`Graph does not contain edges with negative weight.`)
 
-        if (algorithm !== "-d" || !distancesToPeaks.isContainsNegativeEdge()) {
             write(`Shortest paths lengths:\n`)
-            let distances: number[] = distancesToPeaks.solve()
-            for (let i = 0; i < distances.length; i++) if (i !== beginVertex) write(`${beginVertex} - ${i}: ${distances[i]}`)        
-        }
+            for (let i = 0; i < distances.length; i++) if (i !== beginVertex) write(`${beginVertex} - ${i}: ${distances[i]}`)   
     }
 }
 

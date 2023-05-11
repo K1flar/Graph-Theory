@@ -6,7 +6,7 @@ class AlgLevit extends AbstractDistancesToPeaks {
         super(graph, startVertex)
     }
 
-    public solve(): number[] {
+    public solve(): [number[], boolean] {
         let distances: number[] = new Array(this._matrix.length).fill(Infinity)
         distances[this._startVertex] = 0
         // принадлежность вершины к множеству
@@ -37,8 +37,11 @@ class AlgLevit extends AbstractDistancesToPeaks {
                 }
             }
             belong[u] = 0
+
+            for (let d of distances) if (d < 0) return [[], true]
         }
-        return distances
+
+        return [distances, false]
     }
 }
 
