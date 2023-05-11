@@ -10,7 +10,6 @@ class AlgDijkstra extends AbstractDistancesToPeaks {
         let distances: number[] = new Array(this._matrix.length).fill(Infinity) // массив расстояний от startVertex
         let visited: boolean[] = new Array(this._matrix.length).fill(false)     // метки посещенных вершин
         let k: number = 0 // количество посещенных
-
         distances[this._startVertex] = 0
 
         // количество посещений для каждой вершины

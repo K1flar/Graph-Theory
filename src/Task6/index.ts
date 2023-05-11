@@ -3,7 +3,6 @@ import DistancesToPeaksInputKeyManager from "./DistancesToPeaksInputKeyManager"
 import output from "../modules/output/output"
 import AlgDijkstra from "./AlgDijkstra"
 import AlgBellmanFord from "./AlgBellmanFord"
-import AbstractDistancesToPeaks from "./AbstractDistancesToPeaks"
 import AlgLevit from "./AlgLevit"
 
 const main = (): void => {
