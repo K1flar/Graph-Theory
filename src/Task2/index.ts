@@ -36,11 +36,9 @@ const main = (): void => {
         if (graphConnectivity.isConnectedness()) write("Digraph is connected.\n")
         else write(`Digraph is not connected and contains ${graphConnectivity.connectivityComponents().length} connected components.\n`)
         write(`Connected components:\n[${graphConnectivity.connectivityComponents().map(el => `[${el}]`)}]\n`)
-        if (graphConnectivity.isConnectedness()) {
-            if ((graphConnectivity as DirectedGraphConnectivity).isStronglyConnected()) write(`Digraph is strongly connected.\n`)
-            else write(`Digraph is weakly connected and contains ${(graphConnectivity as DirectedGraphConnectivity).stronglyConnectedComponents().length} strongly connected components.\n`)
-            write(`Strongly connected components:\n[${(graphConnectivity as DirectedGraphConnectivity).stronglyConnectedComponents().map(el => `[${el}]`)}]`)
-        }    
+        if ((graphConnectivity as DirectedGraphConnectivity).isStronglyConnected()) write(`Digraph is strongly connected.\n`)
+        else write(`Digraph is weakly connected and contains ${(graphConnectivity as DirectedGraphConnectivity).stronglyConnectedComponents().length} strongly connected components.\n`)
+        write(`Strongly connected components:\n[${(graphConnectivity as DirectedGraphConnectivity).stronglyConnectedComponents().map(el => `[${el}]`)}]`)  
     } else {
         if (graphConnectivity.isConnectedness()) write("Graph is connected.\n")
         else write(`Graph is not connected and contains ${graphConnectivity.connectivityComponents().length} connected components.\n`)

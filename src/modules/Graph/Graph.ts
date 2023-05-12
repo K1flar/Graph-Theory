@@ -44,8 +44,8 @@ class Graph {
     }
 
     public relatedGraphAdjacencyMatrix(): number[][] {
-        if (!this.is_directed()) return this._matrix
         let matrix: number[][] = this.adjacency_matrix()
+        if (!this.is_directed()) return matrix
         for (let i = 0; i < matrix.length; i++)
             for (let j = 0; j < matrix.length; j++)
                 matrix[i][j] ||= matrix[j][i]
