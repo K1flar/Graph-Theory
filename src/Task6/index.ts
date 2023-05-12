@@ -32,13 +32,13 @@ const main = (): void => {
     let {beginVertex, algorithm} = keyManager
 
     const algorithms = {
-        "-d": new AlgDijkstra(graph, beginVertex),
-        "-b": new AlgBellmanFord(graph, beginVertex),
-        "-t": new AlgLevit(graph, beginVertex)
+        "-d": new AlgDijkstra(graph),
+        "-b": new AlgBellmanFord(graph),
+        "-t": new AlgLevit(graph)
     }
 
     const distancesToPeaks = algorithms[algorithm as keyof typeof algorithms] 
-    let [distances, isContainsNegativeCycle] = distancesToPeaks.solve()
+    let [distances, isContainsNegativeCycle] = distancesToPeaks.solve(beginVertex)
 
     const write = output(keyManager.outputFileName)
 

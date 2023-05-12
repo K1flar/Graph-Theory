@@ -2,24 +2,24 @@ import Graph from "../modules/Graph/Graph"
 import AbstractDistancesToPeaks from "./AbstractDistancesToPeaks"
 
 class AlgDijkstra extends AbstractDistancesToPeaks {
-    constructor(graph: Graph, startVertex: number) {
-        super(graph, startVertex)
+    constructor(graph: Graph) {
+        super(graph)
     }
 
-    public solve(): [number[], boolean] {
-        let distances: number[] = new Array(this._matrix.length).fill(Infinity) // массив расстояний от startVertex
-        let visited: boolean[] = new Array(this._matrix.length).fill(false)     // метки посещенных вершин
+    public solve(startVertex: number): [number[], boolean] {
+        let distances: number[] = new Array(this._graph.countVertex).fill(Infinity) // массив расстояний от startVertex
+        let visited: boolean[] = new Array(this._graph.countVertex).fill(false)     // метки посещенных вершин
         let k: number = 0 // количество посещенных
-        distances[this._startVertex] = 0
+        distances[startVertex] = 0
 
         // количество посещений для каждой вершины
-        let count: number[] = new Array(this._matrix.length).fill(0)
+        let count: number[] = new Array(this._graph.countVertex).fill(0)
 
-        while (k != this._matrix.length) {
+        while (k != this._graph.countVertex) {
             // выбор необработанной вершины с минимальной пометкой distance
             let md: number = Infinity
             let v: number = -1
-            for (let i = 0; i < this._matrix.length; i++) {
+            for (let i = 0; i < this._graph.countVertex; i++) {
                 if (!visited[i] && distances[i] < md) {
                     md = distances[i]
                     v = i
@@ -49,7 +49,7 @@ class AlgDijkstra extends AbstractDistancesToPeaks {
             }
 
             // если вершину посещали уже n раз, значит в графе есть цикл
-            for (let k of count) if (k === this._matrix.length) return [[], true]
+            for (let k of count) if (k === this._graph.countVertex) return [[], true]
 
         }
 

@@ -2,18 +2,18 @@ import Graph from "../modules/Graph/Graph"
 import AbstractDistancesToPeaks from "./AbstractDistancesToPeaks"
 
 class AlgLevit extends AbstractDistancesToPeaks {
-    constructor (graph: Graph, startVertex: number) {
-        super(graph, startVertex)
+    constructor (graph: Graph) {
+        super(graph)
     }
 
-    public solve(): [number[], boolean] {
-        let distances: number[] = new Array(this._matrix.length).fill(Infinity)
-        distances[this._startVertex] = 0
+    public solve(startVertex: number): [number[], boolean] {
+        let distances: number[] = new Array(this._graph.countVertex).fill(Infinity)
+        distances[startVertex] = 0
         // принадлежность вершины к множеству
-        let belong: number[] = new Array(this._matrix.length).fill(2) // изначально все необработанные (кроме startVertex)
-        belong[this._startVertex] = 1
+        let belong: number[] = new Array(this._graph.countVertex).fill(2) // изначально все необработанные (кроме startVertex)
+        belong[startVertex] = 1
 
-        let queue: number[] = [this._startVertex]
+        let queue: number[] = [startVertex]
         let urgentQueue: number[] = []
 
         while (queue.length !== 0 || urgentQueue.length !== 0) {

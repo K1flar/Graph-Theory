@@ -2,13 +2,9 @@ import Graph from "../modules/Graph/Graph"
 
 abstract class AbstractDistancesToPeaks {
     protected readonly _graph: Graph
-    protected readonly _matrix: number[][]
-    protected readonly _startVertex: number
     
-    constructor (graph: Graph, startVertex: number = 0) {
+    constructor (graph: Graph) {
         this._graph = graph
-        this._matrix = graph.adjacency_matrix()
-        this._startVertex = startVertex
     }
 
     public isContainsNegativeEdge(): boolean {
