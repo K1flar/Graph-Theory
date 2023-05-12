@@ -1,4 +1,5 @@
 import Graph from "../modules/Graph/Graph"
+import ModifiedGraph from "../modules/Graph/ModifiedGraph"
 
 abstract class AbstractDistancesToPeaks {
     protected readonly _graph: Graph

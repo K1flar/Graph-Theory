@@ -51,7 +51,7 @@ const main = (): void => {
             write(`Graph does not contain edges with negative weight.`)
 
             write(`Shortest paths lengths:\n`)
-            for (let i = 0; i < distances.length; i++) if (i !== beginVertex) write(`${beginVertex} - ${i}: ${distances[i]}`)   
+            for (let i = 0; i < distances.length; i++) if (i !== beginVertex) write(`${beginVertex} - ${i}: ${distances[i]}\n`)   
     }
 }
 

@@ -10,7 +10,7 @@ class AlgBellmanFord extends AbstractDistancesToPeaks {
         let distances: number[] = new Array(this._graph.countVertex).fill(Infinity)
         distances[startVertex] = 0
         let edges: Edge[] = this._graph.list_of_edges()
-        console.log(edges)
+        
         for (let i = 0; i < this._graph.countVertex - 1; i++) {
             for (let e of edges) {
                 distances[e.v] = Math.min(distances[e.v], distances[e.u] + e.weight)

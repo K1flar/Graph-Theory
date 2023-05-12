@@ -27,13 +27,25 @@ const main = (): void => {
 
     const graph: ModifiedGraph = new ModifiedGraph(keyManager.strategyReading)
 
-    let [distances, isContainsNegativeCycle] = new AllDistances(graph).algJohnson()
-    
-    console.log(isContainsNegativeCycle)
-    console.log(distances)
+    const allDistance: AllDistances = new AllDistances(graph)
+    let [distances, isContainsNegativeCycle] = allDistance.algJohnson()
     
     const write = output(keyManager.outputFileName)
 
+    if (isContainsNegativeCycle) {
+        write(`Graph contains a negative cycle.\n`)
+    } else {
+        if (allDistance.isContainsNegativeEdge()) 
+            write(`Graph contains edges with negative weight.`)
+        else 
+            write(`Graph does not contain edges with negative weight.`)
+
+        write(`Shortest paths lengths:\n`)
+        for (let i = 0; i < distances.length; i++) 
+            for (let j = 0; j < distances.length; j++)
+                if (distances[i][j] !== Infinity && i !== j)
+                    write(`${i} - ${j}: ${distances[i][j]}\n`)   
+    }
 }
 
 main()
