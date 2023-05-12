@@ -1,12 +1,16 @@
 class Graph {
-    protected readonly _matrix: number[][] = []
+    protected _matrix: number[][] = []
+    protected _countVertex: number
 
     constructor(strategyReading: () => number[][]) {
         this._matrix = strategyReading()
+        this._countVertex = this._matrix.length
     }
 
+    get countVertex(): number { return this._countVertex }
+
     public weight(vi: number, vj: number): number {
-        return (this.is_edge(vi, vj) ? this._matrix[vi][vj] : Infinity)
+        return this._matrix[vi][vj]
     }
 
     public is_edge(vi: number, vj: number): boolean {
