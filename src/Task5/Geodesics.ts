@@ -29,6 +29,7 @@ class Geodesics {
                     md = distance[i]
                     v = i
                 }
+            // проверка на отсутствие пути
             if (md === Infinity) return [[], -1]
             
             // помечаем вершину обработанной

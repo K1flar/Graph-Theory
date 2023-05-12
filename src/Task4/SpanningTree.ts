@@ -29,6 +29,7 @@ class SpanningTree {
             if (colors[edge.u] !== colors[edge.v]) {
                 tree.push(edge)
                 sum += edge.weight
+                // слияние компонент
                 for (let i = 0; i < this._matrix.length; i++)
                     if (colors[i] === colors[edge.v] && i !== edge.v) colors[i] = colors[edge.u]
 
@@ -54,6 +55,7 @@ class SpanningTree {
             // поиск минимального ребра к дереву
             for (let e of edges) {
                 if ((e.weight < edgeMin.weight) && 
+                // проверка на принадлежность к дереву вершины u или вершины v и не принадлежность обеих вершин одновременно
                 ((vertices.has(e.u) || vertices.has(e.v)) && (!vertices.has(e.u) || !vertices.has(e.v))))
                     edgeMin = e
             }

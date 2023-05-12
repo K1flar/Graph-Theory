@@ -5,7 +5,7 @@ class ModifiedGraph extends Graph {
 
     constructor(strategyReading: () => number[][]) {
         super(strategyReading)
-        
+
         for (let i = 0; i < this._countVertex; i++)
             for (let j = 0; j < this._countVertex; j++)
                 if (this.is_edge(i, j)) this._edges.push({u: i, v: j, weight: this.weight(i, j)})
