@@ -7,7 +7,7 @@ class Graph {
         this._countVertex = this._matrix.length
     }
 
-    get countVertex(): number { return this._countVertex }
+    public get countVertex(): number { return this._countVertex }
 
     public weight(vi: number, vj: number): number {
         return this._matrix[vi][vj]
