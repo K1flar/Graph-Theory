@@ -7,10 +7,10 @@ import parseEdgesList from "./parseEdgesList"
 import parseAdjacencyList from "./parseAdjacencyList"
 
 class InputKeyManager {
-    public readonly inputFileName?: string
-    public readonly strategyReading?: () => number[][]
-    public readonly outputFileName?: string
-    public readonly isHelp?: boolean
+    public inputFileName?: string
+    public strategyReading?: () => number[][]
+    public outputFileName?: string
+    public isHelp?: boolean
 
     protected params: Param[] = []
 
