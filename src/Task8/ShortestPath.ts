@@ -12,7 +12,6 @@ class ShortestPath {
     public AStar(bc: Cell, ec: Cell, h: (u: Cell, v: Cell) => number): [Cell[], number] {
         let path: Cell[] = [ec]
         
-
         let openCells: Cell[] = [bc]
         let closedCells: Cell[] = []
         let currentCell: Cell = bc
@@ -36,14 +35,16 @@ class ShortestPath {
             let neighbours: Cell[] = this._map.neighbors(currentCell)
             for (let n of neighbours) {
                 if (closedCells.find((e) => (n.x === e.x && n.y === e.y))) continue
- 
-                if (openCells.find((e) => (n.x === e.x && n.y === e.y))) {
+                
+                // клетка в открытом списке
+                let oc = openCells.find((e) => (n.x === e.x && n.y === e.y))
+                if (oc) {
                     // расстояние от стартовой клетки
-                    let newDistance = currentCell.distanceFromStart! + this._map.distance(currentCell, n)
-                    if (n.distanceFromStart! > newDistance) {
-                        n.parent = currentCell
-                        n.distanceFromStart = newDistance
-                        n.fullDistance = n.distanceFromStart + h(n, ec)  
+                    let newDistance = currentCell.distanceFromStart! + this._map.distance(currentCell, oc)
+                    if (oc.distanceFromStart! > newDistance) {
+                        oc.parent = currentCell
+                        oc.distanceFromStart = newDistance
+                        oc.fullDistance = oc.distanceFromStart + h(n, ec)  
                     }
                 } else {
                     n.parent = currentCell
