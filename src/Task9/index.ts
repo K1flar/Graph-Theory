@@ -28,9 +28,8 @@ const main = (): void => {
     const graph: Graph = new Graph(keyManager.strategyReading)
 
     const shortestHamiltonianPath = (new ShortestHamiltonianPath(graph)).algAntColony(keyManager.beginVertex)
-    console.log(shortestHamiltonianPath)
-    console.log(shortestHamiltonianPath.reduce((acc, e) => acc + e.weight, 0))
     const write = output(keyManager.outputFileName)
+    write(`Hamiltonian cycle has length ${shortestHamiltonianPath.reduce((acc, e) => acc + e.weight, 0)}.\n${shortestHamiltonianPath.map(e => `${e.u} - ${e.v} : (${e.weight})\n`).join(``)}`)
 
 
 }

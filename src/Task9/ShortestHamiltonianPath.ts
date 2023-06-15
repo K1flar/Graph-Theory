@@ -64,7 +64,7 @@ class ShortestHamiltonianPath {
                 }
             }
         }
-        console.log(this._pheromones)
+        
         // формирвоание оптимального пути
         let cur = beginVertex
         let next: number
