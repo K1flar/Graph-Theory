@@ -9,7 +9,7 @@ class MapGrid {
         this._countCells = this._map.length
     }
 
-    get map(): number[][] { return JSON.parse(JSON.stringify(this._map)) }
+    get map(): number[][] { return JSON.parse(JSON.stringify(this._map)) }  
 
     public neighbors(c: Cell): Cell[] {
         let neighbors: Cell[] = []

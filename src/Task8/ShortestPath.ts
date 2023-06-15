@@ -53,7 +53,6 @@ class ShortestPath {
                     openCells.push(n)
                 }
             }
-            
         }
 
         let c = currentCell

@@ -1,5 +1,5 @@
 import Graph from "../modules/Graph/Graph"
-import GeodesicsInputKeyManaher from "./GeodesicsInputKeyManaher"
+import GeodesicsInputKeyManaher from "./GeodesicsInputKeyManager"
 import output from "../modules/output/output"
 import Geodesics from "./Geodesics"
 

@@ -44,6 +44,7 @@ class MaxFlow {
         // пока есть дополняющая цепь
         while(this.DFS(this._source, Infinity, visited)) visited = visited.fill(false);
 
+        // складываем все потоки, входящие в сток
         let mf = this._matrix[this._sink].reduce((acc, el) => acc + el, 0)
 
         // заполняем ребра их значение потока, проходящих через них
@@ -61,7 +62,7 @@ class MaxFlow {
         for (let v of neigh) {
             if (!visited[v]) {
                 let f = this.DFS(v, Math.min(cmin, this._matrix[u][v]), visited)
-                // если цепь найдена
+                // если цепь найдена пропускную способность понижаем, а поток ребра делаем больше
                 if (f) {
                     this._matrix[u][v] -= f
                     this._matrix[v][u] += f
