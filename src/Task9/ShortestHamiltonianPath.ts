@@ -30,6 +30,7 @@ class ShortestHamiltonianPath {
         let T: number = 500 // количество итераций
         
         for (T; T > 0; T--) {
+            let pathes: [Edge[], number][] = []
             // "рассаживаем" муравья на каждую вершину
             for (let i = 0; i < this._graph.countVertex; i++) {
                 let visited: boolean[] = new Array(this._graph.countVertex).fill(false)
@@ -56,12 +57,17 @@ class ShortestHamiltonianPath {
                 }
                 path.push({u: path[path.length - 1].v, v: i, weight: this._graph.weight(path[path.length - 1].v, i)})
                 len += this._graph.weight(path[path.length - 1].v, i)
-                
-                // обновляем ферамонный след
+                pathes.push([path, len])
+            }
+            // обновляем ферамонный след
+            for (let i = 0; i < this._pheromones.length; i++)
+                for (let j = 0; j < this._pheromones.length; j++)
+                    this._pheromones[i][j] *= (1 - this.p)
+
+            for (let [path, len] of pathes)        
                 for (let i = 0, e = path[0]; i < path.length; e = path[++i]) {
-                    this._pheromones[e.u][e.v] = (1 - this.p) * this._pheromones[e.u][e.v] + this.Q / len
+                    this._pheromones[e.u][e.v] += this.Q / len
                     this._pheromones[e.v][e.u] = this._pheromones[e.u][e.v] 
-                }
             }
         }
         
