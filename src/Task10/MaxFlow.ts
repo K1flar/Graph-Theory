@@ -16,6 +16,8 @@ class MaxFlow {
         if (this._source === -1 || this._sink === -1) throw new Error("There is no source or sink in the network")
     }
 
+    public get network(): number[][] { return JSON.parse(JSON.stringify(this._matrix)) }
+
     public get source(): number { return this._source }
     
     public get sink(): number { return this._sink }
